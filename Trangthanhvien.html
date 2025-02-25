@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách thành viên lớp</title>
+    <link rel="stylesheet" href="tongtrang.css">
+</head>
+<body>
+    <header>
+        <h1>Chào mừng đến với lớp 12A7</h1>
+        <h2>Slogan: "12A7 Không bao giờ gãy"</h2>
+    </header>
+   
+    <nav>
+        <ul>
+            <li><a href="Trangchu.html">Trang Chủ</a></li>
+            <li><a href="Trangthanhvien.html">Thành Viên</a></li>
+            <li><a href="Tranghoatdong.html">Hoạt Động</a></li>
+            <li><a href="Trangthuvienanh.html">Thư Viện Ảnh</a></li>
+            <li><a href="Tranglienhe.html">Liên Hệ</a></li>
+        </ul>
+    </nav>
+    <input type="text" id="search" onkeyup="searchTable()" placeholder="Tìm kiếm theo tên...">
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Họ và Tên</th>
+                <th>Ngày Sinh</th>
+            </tr>
+        </thead>
+        <tbody id="studentTable"></tbody>
+    </table>
+    <script>
+        const students = [
+			
+            {stt: 1, name: "HUỲNH QUỐC ANH", dob: "28/04/2007"},
+            {stt: 2, name: "NGUYỄN THỊ KIM ANH", dob: "10/12/2007"},
+            {stt: 3, name: "PHAN NGUYỄN PHƯƠNG ANH", dob: "07/03/2007"},
+            {stt: 4, name: "PHAN TRUNG BẠC", dob: "21/05/2007"},
+            {stt: 5, name: "BÙI KHÁNH DÂN", dob: "12/11/2007"},
+            {stt: 6, name: "NGUYỄN CÔNG DANH", dob: "19/04/2007"},
+            {stt: 7, name: "PHẠM TUẤN DUY", dob: "09/05/2007"},			
+            {stt: 8, name: "LÂM HÀ DUYÊN", dob: "08/03/2007"},
+            {stt: 9, name: "NGUYỄN THANH ĐẠT", dob: "03/02/2007"},
+            {stt: 10, name: "BÙI THỊ NGỌC HÂN", dob: "12/03/2007"},
+            {stt: 11, name: "TRẦN THỊ NGỌC HIÊN", dob: "02/03/2007"},
+            {stt: 12, name: "NGUYỄN CAO MỸ HOA", dob: "13/01/2007"},
+			{stt: 13, name: "QUÁCH GIA HUY", dob: "12/05/2007"},
+            {stt: 14, name: "NGUYỄN THỊ BÍCH HUYỀN", dob: "20/01/2007"},
+            {stt: 15, name: "QUÁCH GIA HỶ", dob: "12/09/2007"},
+            {stt: 16, name: "NGUYỄN LA VĨNH KHANG", dob: "12/04/2007"},
+			{stt: 17, name: "QUÁCH GIA KHANG", dob: "24/07/2007"},
+            {stt: 18, name: "ĐỖ HUỲNH ANH KIỆT", dob: "27/12/2007"},
+            {stt: 19, name: "NGUYỄN NGỌC BĂNG LONG", dob: "31/12/2007"},
+            {stt: 20, name: "HUỲNH HỮU MINH", dob: "14/01/2007"},
+            {stt: 21, name: "PHAN VÕ XUÂN MINH", dob: "11/01/2007"},
+			{stt: 22, name: "TẦN NGHI", dob: "04/06/2007"},
+			{stt: 23, name: "NGUYỄN THỊ KHẢ NHI", dob: "08/06/2007"},
+			{stt: 24, name: "TRẦN THỊ PHƯƠNG NHI", dob: "21/03/2007"},
+			{stt: 25, name: "VÕ THỊ YẾN NHI", dob: "29/09/2007"},
+			{stt: 26, name: "LÂM THIÊN NHƯ", dob: "07/09/2007"},
+            {stt: 27, name: "TĂNG THỊ HUỲNH NHƯ", dob: "04/09/2007"},
+            {stt: 28, name: "NGUYỄN TẤN PHÁT", dob: "12/03/2007"},
+            {stt: 29, name: "NGUYỄN TRƯƠNG THIÊN PHÚC", dob: "01/01/2007"},
+            {stt: 30, name: "LÂM HOÀNG THIÊN", dob: "05/07/2007"},
+            {stt: 31, name: "LÊ MINH THƯ", dob: "07/09/2007"},
+            {stt: 32, name: "LÊ NGUYỄN ANH THƯ", dob: "21/06/2007"},
+            {stt: 33, name: "VÕ TÂN TIẾN", dob: "27/12/2007"},
+            {stt: 34, name: "NGUYỄN LÊ HUYỀN TRÂM", dob: "18/04/2007"},
+            {stt: 35, name: "NGUYỄN THỊ BÍCH TRÂM", dob: "17/10/2007"},
+            {stt: 36, name: "LÊ THỊ KIỀU TRINH", dob: "23/05/2007"},
+            {stt: 37, name: "PHAN ÁNH TUYẾT", dob: "04/09/2007"},
+            {stt: 38, name: "PHẠM TRƯỜNG PHI TUYẾT", dob: "10/04/2007"},
+            {stt: 39, name: "LÊ BẢO VY", dob: "09/05/2007"},
+    {stt: 40, name: "LÊ TUYẾT VY", dob: "09/05/2007"},
+            {stt: 41, name: "PHAN TRUNG TỶ", dob: "21/05/2007"},
+            {stt: 42, name: "NGUYỄN THỊ NHƯ Ý", dob: "29/03/2007"},
+            {stt: 43, name: "LÊ NGUYỄN PHI YẾN", dob: "05/02/2007"},
+            {stt: 44, name: "TỐNG NGUYỄN HẢI YẾN", dob: "13/02/2007"}
+        ];
+        let table = document.getElementById("studentTable");
+        students.forEach(student => {
+            let row = table.insertRow();
+            row.insertCell(0).innerText = student.stt;
+            row.insertCell(1).innerText = student.name;
+            row.insertCell(2).innerText = student.dob;
+        });
+        function searchTable() {
+            let input = document.getElementById("search").value.toUpperCase();
+            let rows = table.getElementsByTagName("tr");
+            for (let i = 0; i < rows.length; i++) {
+                let nameCell = rows[i].getElementsByTagName("td")[1];
+                if (nameCell) {
+                    let nameValue = nameCell.textContent || nameCell.innerText;
+                    rows[i].style.display = nameValue.toUpperCase().indexOf(input) > -1 ? "" : "none";
+                }
+            }
+        }
+    </script>
+  </main>
+  <footer>
+    <p>&copy; 2025 Lớp 12A7. All rights reserved.</p>
+  </footer>
+</body>
+</html>
